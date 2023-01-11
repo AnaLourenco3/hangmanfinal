@@ -6,6 +6,8 @@ import words from "../Components/wordList";
 import styled from "styled-components";
 import BgImg from "../Assets/Chalkboard.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import SelectGenre from "../Components/SelectGenre";
 
 function getWord() {
   return words[Math.floor(Math.random() * words.length)];
@@ -13,18 +15,27 @@ function getWord() {
 
 function GamePage() {
   const navigate = useNavigate();
-  const [wordToGuess, setWordToGuess] = useState(getWord);
+  const [wordToGuess, setWordToGuess] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
-  const [genre, setGenre] = useState("");
+  const [titles, setTitles] = useState("");
+  // const titleToGuess =
+  //   titles && titles[Math.floor(Math.random() * titles.length)];
+  // console.log("title to guess?", titleToGuess.title);
+
+  useEffect(() => {
+    const titleToGuess =
+      titles && titles[Math.floor(Math.random() * titles.length)];
+    setWordToGuess(titleToGuess);
+  }, []);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
 
   const isLoser = incorrectLetters.length >= 10;
-  const isWinner = wordToGuess
-    .split("")
-    .every((letter) => guessedLetters.includes(letter));
+  const isWinner =
+    wordToGuess &&
+    wordToGuess.split("").every((letter) => guessedLetters.includes(letter));
 
   const addGuessedLetter = useCallback(
     (letter) => {
@@ -97,7 +108,8 @@ function GamePage() {
     <Background>
       <Title>HANGMAN - MOVIE EDITION</Title>
       <div>
-        <FormWrapper>
+        <SelectGenre setter={setTitles} getter={titles} />
+        {/* <FormWrapper>
           <Form action="#">
             <FormGroup>
               <Genre>Select genre:</Genre>
@@ -119,7 +131,7 @@ function GamePage() {
               </InputSelect>
             </FormGroup>
           </Form>
-        </FormWrapper>
+        </FormWrapper> */}
       </div>
       <NewGame onClick={refreshPage}>NEW GAME</NewGame>
       {/* <Hint onClick={}>Hint</Hint> */}
