@@ -1,0 +1,15 @@
+.todo{
+   display: flex;
+    align-self: flex-start;
+    margin-left: 150px;
+}
+.words{
+    align-self: center;
+    margin-left: 200px;
+
+}
+
+.game{
+  
+   margin-right: 20px;
+}
