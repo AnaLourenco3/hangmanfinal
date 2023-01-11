@@ -4,14 +4,14 @@ export function HangmanWord({ guessedLetters, wordToGuess, reveal = false }) {
       style={{
         display: "flex",
         gap: ".25em",
-        fontSize: "6rem",
-        fontWeight: "bold",
+        fontSize: "3rem",
+
         textTransform: "uppercase",
-        fontFamily: "monospace",
+        fontFamily: "Chalk",
       }}
     >
       {wordToGuess.split("").map((letter, index) => (
-        <span style={{ borderBottom: ".1em solid black" }} key={index}>
+        <span style={{ borderBottom: ".1em solid white" }} key={index}>
           <span
             style={{
               visibility:
@@ -19,7 +19,9 @@ export function HangmanWord({ guessedLetters, wordToGuess, reveal = false }) {
                   ? "visible"
                   : "hidden",
               color:
-                !guessedLetters.includes(letter) && reveal ? "red" : "black",
+                !guessedLetters.includes(letter) && reveal
+                  ? "red"
+                  : "rgba(250,250,250,0.9)",
             }}
           >
             {letter}

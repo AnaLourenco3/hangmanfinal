@@ -96,7 +96,7 @@ function GamePage() {
         <FormWrapper>
           <Form action="#">
             <FormGroup>
-              <Genre>Genre:</Genre>
+              <Genre>Select genre:</Genre>
               <InputSelect
                 name="genre"
                 onChange={(event) => setGenre(event.target.value)}
@@ -117,11 +117,11 @@ function GamePage() {
           </Form>
         </FormWrapper>
       </div>
-      <Button onClick={() => navigate("/")}>NEW GAME</Button>
-
+      <Button onClick={() => navigate("/hangman")}>NEW GAME</Button>
+      <Hint onClick={() => navigate("/hangman")}>Hint</Hint>
       <WinLoose>
-        {isWinner && "Winner! - Refresh to try again"}
-        {isLoser && "Nice Try - Refresh to try again"}
+        {isWinner && "WELL DONE!"}
+        {isLoser && "LOOOOOSSSSSEEEERRRRR!"}
       </WinLoose>
       <div
         style={{
@@ -186,8 +186,8 @@ const WinLoose = styled.div`
   position: absolute;
   max-width: 200px;
   top: 40%;
-  right: 12%;
-  font-size: 2rem;
+  right: 15%;
+  font-size: 1.5rem;
   text-align: center;
 `;
 
@@ -212,7 +212,7 @@ const Genre = styled.p`
 
 const Button = styled.button`
   position: absolute;
-  top: 15%;
+  top: 45%;
   left: 5%;
   width: 200px;
   height: 50px;
@@ -248,4 +248,18 @@ const InputSelect = styled.select`
   font-size: 0.8rem;
   color: rgba(250, 250, 250, 0.8);
   border: 1px solid rgba(250, 250, 250, 0.8);
+`;
+
+const Hint = styled.button`
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  width: 200px;
+  height: 50px;
+  background: none;
+  border-radius: 50px;
+  font-family: Chalk;
+  color: rgba(250, 250, 250, 0.8);
+  font-size: 1rem;
+  letter-spacing: 5px;
 `;
