@@ -1,4 +1,11 @@
-import teacher from "../Assets/Swen.png";
+import Swen from "../Assets/Swen.png";
+import Karla from "../Assets/Karla.png";
+import Maria from "../Assets/Maria.png";
+
+const img = [Swen, Karla, Maria];
+function imgRandom(imgArr) {
+  return imgArr[Math.floor(Math.random() * imgArr.length)];
+}
 
 const HEAD = (
   //   <div
@@ -13,7 +20,7 @@ const HEAD = (
   //     }}
   //   />
   <img
-    src={teacher}
+    src={imgRandom(img)}
     alt="Logo"
     style={{
       width: "150px",
