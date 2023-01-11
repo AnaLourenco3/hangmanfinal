@@ -2,7 +2,7 @@ import Swen from "../Assets/Swen.png";
 import Karla from "../Assets/Karla.png";
 import Maria from "../Assets/Maria.png";
 
-const img = [Swen, Karla, Maria];
+const img = [Karla, Maria, Swen];
 function imgRandom(imgArr) {
   return imgArr[Math.floor(Math.random() * imgArr.length)];
 }
