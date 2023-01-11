@@ -2,6 +2,8 @@ import Swen from "../Assets/Swen.png";
 import Karla from "../Assets/Karla.png";
 import Maria from "../Assets/Maria.png";
 import Duck from "../Assets/duck.png";
+import Sunglasses from "../Assets/sunglasses.png";
+import Shoe from "../Assets/shoe.png";
 
 const img = [Karla, Maria, Swen];
 function imgRandom(imgArr) {
@@ -9,17 +11,6 @@ function imgRandom(imgArr) {
 }
 
 const HEAD = (
-  //   <div
-  //     style={{
-  //       width: "50px",
-  //       height: "50px",
-  //       borderRadius: "100%",
-  //       border: "10px solid white",
-  //       position: "absolute",
-  //       top: "50px",
-  //       right: "-30px",
-  //     }}
-  //   />
   <img
     src={imgRandom(img)}
     alt="Logo"
@@ -124,7 +115,68 @@ const DUCK = (
   />
 );
 
-const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG, DUCK];
+const RIGHT_SHOE = (
+  <img
+    src={Shoe}
+    alt="Logo"
+    style={{
+      width: "80px",
+      height: "100px",
+
+      position: "absolute",
+      top: "265px",
+      right: "30px",
+      zIndex: 3,
+    }}
+  />
+);
+
+const LEFT_SHOE = (
+  <img
+    src={Shoe}
+    alt="Logo"
+    style={{
+      width: "80px",
+      height: "100px",
+
+      position: "absolute",
+      top: "265px",
+      right: "-100px",
+      zIndex: 3,
+      transform: "scaleX(-1)",
+    }}
+  />
+);
+
+const SUN = (
+  <img
+    src={Sunglasses}
+    alt="Logo"
+    style={{
+      width: "150px",
+      height: "150px",
+
+      position: "absolute",
+      top: "25px",
+      right: "-70px",
+      zIndex: 3,
+    }}
+  />
+);
+
+const BODY_PARTS = [
+  HEAD,
+  BODY,
+  RIGHT_ARM,
+  LEFT_ARM,
+  RIGHT_LEG,
+  LEFT_LEG,
+
+  RIGHT_SHOE,
+  LEFT_SHOE,
+  DUCK,
+  SUN,
+];
 
 export function HangmanDrawing({ numberOfGuesses }) {
   return (
