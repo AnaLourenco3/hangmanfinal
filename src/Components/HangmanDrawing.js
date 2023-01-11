@@ -1,13 +1,28 @@
+import teacher from "../Assets/Swen.png";
+
 const HEAD = (
-  <div
+  //   <div
+  //     style={{
+  //       width: "50px",
+  //       height: "50px",
+  //       borderRadius: "100%",
+  //       border: "10px solid white",
+  //       position: "absolute",
+  //       top: "50px",
+  //       right: "-30px",
+  //     }}
+  //   />
+  <img
+    src={teacher}
+    alt="Logo"
     style={{
-      width: "50px",
-      height: "50px",
-      borderRadius: "100%",
-      border: "10px solid white",
+      width: "150px",
+      height: "150px",
+
       position: "absolute",
-      top: "50px",
-      right: "-30px",
+      top: "25px",
+      right: "-70px",
+      zIndex: 1,
     }}
   />
 );
@@ -19,7 +34,7 @@ const BODY = (
       height: "100px",
       background: "white",
       position: "absolute",
-      top: "120px",
+      top: "175px",
       right: 0,
     }}
   />
@@ -32,7 +47,7 @@ const RIGHT_ARM = (
       height: "10px",
       background: "white",
       position: "absolute",
-      top: "150px",
+      top: "200px",
       right: "-100px",
       rotate: "-30deg",
       transformOrigin: "left bottom",
@@ -47,7 +62,7 @@ const LEFT_ARM = (
       height: "10px",
       background: "white",
       position: "absolute",
-      top: "150px",
+      top: "200px",
       right: "10px",
       rotate: "30deg",
       transformOrigin: "right bottom",
@@ -62,7 +77,7 @@ const RIGHT_LEG = (
       height: "10px",
       background: "white",
       position: "absolute",
-      top: "210px",
+      top: "255px",
       right: "-90px",
       rotate: "60deg",
       transformOrigin: "left bottom",
@@ -77,7 +92,7 @@ const LEFT_LEG = (
       height: "10px",
       background: "white",
       position: "absolute",
-      top: "210px",
+      top: "255px",
       right: 0,
       rotate: "-60deg",
       transformOrigin: "right bottom",

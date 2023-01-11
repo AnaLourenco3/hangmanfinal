@@ -138,7 +138,7 @@ function GamePage() {
           margin: "0 auto",
           alignItems: "center",
           maxHeight: "600px",
-          paddingTop: "5rem",
+          paddingTop: "7rem",
         }}
       >
         <HangmanContainer>
@@ -178,7 +178,7 @@ const Background = styled.div`
 `;
 
 const HangmanContainer = styled.div`
-  transform: perspective(400px) translateZ(-200px);
+  transform: perspective(900px) translateZ(-100px);
 `;
 
 const HangmanWords = styled.p`
