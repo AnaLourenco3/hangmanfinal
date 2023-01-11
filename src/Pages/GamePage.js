@@ -3,9 +3,12 @@ import { HangmanDrawing } from "../Components/HangmanDrawing";
 import { HangmanWord } from "../Components/HangmanWord";
 import { Keyboard } from "../Components/Keyboard";
 import words from "../Components/wordList";
+import winnerMe from '../Components/winnersMes.json'
+import loser from '../Components/loserArray.json'
 import styled from "styled-components";
 import BgImg from "../Assets/Chalkboard.png";
 import { useNavigate } from "react-router-dom";
+import '../Pages/containerman.css'
 
 function getWord() {
   return words[Math.floor(Math.random() * words.length)];
@@ -16,15 +19,31 @@ function GamePage() {
   const [wordToGuess, setWordToGuess] = useState(getWord);
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [genre, setGenre] = useState("");
+  const [showMessage, setShowMessage] = useState(true);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
 
-  const isLoser = incorrectLetters.length >= 10;
+  let isLoser = incorrectLetters.length >= 10;
   const isWinner = wordToGuess
     .split("")
     .every((letter) => guessedLetters.includes(letter));
+
+  if (isLoser) {
+    setTimeout(() => {
+      setShowMessage(false)
+
+    }, 10000);
+  }
+  if (isWinner) {
+    setTimeout(() => {
+      setShowMessage(false)
+console.log(isWinner, 'que pasa')
+    }, 10000);
+  }
+
+
 
   const addGuessedLetter = useCallback(
     (letter) => {
@@ -127,10 +146,7 @@ function GamePage() {
         Incorrect Letters:{" "}
         <p style={{ textAlign: "center" }}> {incorrectLetters.length} of 10</p>
       </Incorrect>
-      <WinLoose>
-        {isWinner && "WELL DONE!"}
-        {isLoser && "LOOOOOSSSSSEEEERRRRR!"}
-      </WinLoose>
+
       <div
         style={{
           position: "relative",
@@ -145,16 +161,22 @@ function GamePage() {
           paddingTop: "7rem",
         }}
       >
-        <HangmanContainer>
+        <HangmanContainer className="todo">
           <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
+
+          <HangmanWords className="words">
+            <HangmanWord
+              reveal={isLoser}
+              guessedLetters={guessedLetters}
+              wordToGuess={wordToGuess}
+            />
+          </HangmanWords>
+          <WinLoose className="game">
+            {isWinner && showMessage && <img alt="" src={winnerMe[Math.floor(Math.random() * winnerMe.length)]}></img>}
+            {isLoser && showMessage && <img alt="" src={loser[Math.floor(Math.random() * winnerMe.length)]}></img>}
+          </WinLoose>
         </HangmanContainer>
-        <HangmanWords>
-          <HangmanWord
-            reveal={isLoser}
-            guessedLetters={guessedLetters}
-            wordToGuess={wordToGuess}
-          />
-        </HangmanWords>
+
       </div>
       <div>
         <Keyboard
@@ -182,12 +204,12 @@ const Background = styled.div`
 `;
 
 const HangmanContainer = styled.div`
-  transform: perspective(900px) translateZ(-100px);
+  // transform: perspective(900px) translateZ(-100px);
 `;
 
 const HangmanWords = styled.p`
   /* background-color: rgba(0, 0, 0, 0.5); */
-  transform: perspective(400px) translateZ(-200px);
+  transform: perspective(600px) translateZ(-200px);
 `;
 
 const WinLoose = styled.div`
@@ -197,6 +219,7 @@ const WinLoose = styled.div`
   right: 15%;
   font-size: 1.5rem;
   text-align: center;
+ 
 `;
 
 const Title = styled.p`
