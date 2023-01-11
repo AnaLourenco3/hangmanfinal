@@ -71,5 +71,4 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(13, 1fr);
   grid-gap: 20px;
-  max-height: 100vh;
 `;

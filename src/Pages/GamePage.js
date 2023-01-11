@@ -89,6 +89,10 @@ function GamePage() {
     "Western",
   ];
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
     <Background>
       <Title>HANGMAN - MOVIE EDITION</Title>
@@ -117,8 +121,8 @@ function GamePage() {
           </Form>
         </FormWrapper>
       </div>
-      <Button onClick={() => navigate("/hangman")}>NEW GAME</Button>
-      <Hint onClick={() => navigate("/hangman")}>Hint</Hint>
+      <NewGame onClick={refreshPage}>NEW GAME</NewGame>
+      <Hint /*onClick={}*/>Hint</Hint>
       <WinLoose>
         {isWinner && "WELL DONE!"}
         {isLoser && "LOOOOOSSSSSEEEERRRRR!"}
@@ -210,10 +214,10 @@ const Genre = styled.p`
   top: 5%;
 `;
 
-const Button = styled.button`
+const NewGame = styled.button`
   position: absolute;
   top: 45%;
-  left: 5%;
+  left: 7%;
   width: 200px;
   height: 50px;
   background: none;
@@ -228,7 +232,7 @@ const FormWrapper = styled.div`
   position: absolute;
   display: inline;
   top: 25%;
-  left: 5%;
+  left: 7%;
 `;
 
 const FormGroup = styled.div`
@@ -253,7 +257,7 @@ const InputSelect = styled.select`
 const Hint = styled.button`
   position: absolute;
   top: 55%;
-  left: 5%;
+  left: 7%;
   width: 200px;
   height: 50px;
   background: none;
