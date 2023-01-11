@@ -193,7 +193,7 @@ const HangmanWords = styled.p`
 const WinLoose = styled.div`
   position: absolute;
   max-width: 200px;
-  top: 40%;
+  top: 45%;
   right: 15%;
   font-size: 1.5rem;
   text-align: center;
