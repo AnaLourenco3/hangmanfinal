@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: Chalk ;
+  src:url(./Assets/Chalktastic-r78L.ttf) format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
