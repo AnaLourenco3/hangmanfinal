@@ -1,6 +1,7 @@
 import Swen from "../Assets/Swen.png";
 import Karla from "../Assets/Karla.png";
 import Maria from "../Assets/Maria.png";
+import Duck from "../Assets/duck.png";
 
 const img = [Karla, Maria, Swen];
 function imgRandom(imgArr) {
@@ -107,7 +108,23 @@ const LEFT_LEG = (
   />
 );
 
-const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG];
+const DUCK = (
+  <img
+    src={Duck}
+    alt="Logo"
+    style={{
+      width: "70px",
+      height: "70px",
+
+      position: "absolute",
+      top: "110px",
+      right: "-120px",
+      zIndex: 1,
+    }}
+  />
+);
+
+const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG, DUCK];
 
 export function HangmanDrawing({ numberOfGuesses }) {
   return (

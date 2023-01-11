@@ -21,7 +21,7 @@ function GamePage() {
     (letter) => !wordToGuess.includes(letter)
   );
 
-  const isLoser = incorrectLetters.length >= 6;
+  const isLoser = incorrectLetters.length >= 10;
   const isWinner = wordToGuess
     .split("")
     .every((letter) => guessedLetters.includes(letter));
@@ -122,7 +122,11 @@ function GamePage() {
         </FormWrapper>
       </div>
       <NewGame onClick={refreshPage}>NEW GAME</NewGame>
-      <Hint /*onClick={}*/>Hint</Hint>
+      {/* <Hint onClick={}>Hint</Hint> */}
+      <Incorrect>
+        Incorrect Letters:{" "}
+        <p style={{ textAlign: "center" }}> {incorrectLetters.length} of 10</p>
+      </Incorrect>
       <WinLoose>
         {isWinner && "WELL DONE!"}
         {isLoser && "LOOOOOSSSSSEEEERRRRR!"}
@@ -205,19 +209,16 @@ const Title = styled.p`
   letter-spacing: 5px;
 `;
 
-const Genre = styled.p`
+const Genre = styled.div`
   font-family: Chalk;
-  font-size: 1, 7rem;
-  padding-right: 15px;
-
-  left: 5%;
-  top: 5%;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
 `;
 
 const NewGame = styled.button`
   position: absolute;
-  top: 45%;
-  left: 7%;
+  top: 15%;
+  left: 8%;
   width: 200px;
   height: 50px;
   background: none;
@@ -231,7 +232,7 @@ const NewGame = styled.button`
 const FormWrapper = styled.div`
   position: absolute;
   display: inline;
-  top: 25%;
+  top: 30%;
   left: 7%;
 `;
 
@@ -254,16 +255,25 @@ const InputSelect = styled.select`
   border: 1px solid rgba(250, 250, 250, 0.8);
 `;
 
-const Hint = styled.button`
-  position: absolute;
-  top: 55%;
-  left: 7%;
-  width: 200px;
-  height: 50px;
-  background: none;
-  border-radius: 50px;
+// const Hint = styled.button`
+//   position: absolute;
+//   top: 60%;
+//   left: 8%;
+//   width: 200px;
+//   height: 50px;
+//   background: none;
+//   border-radius: 50px;
+//   font-family: Chalk;
+//   color: rgba(250, 250, 250, 0.8);
+//   font-size: 1rem;
+//   letter-spacing: 5px;
+// `;
+
+const Incorrect = styled.div`
   font-family: Chalk;
-  color: rgba(250, 250, 250, 0.8);
-  font-size: 1rem;
-  letter-spacing: 5px;
+
+  font-size: 1.4rem;
+  position: absolute;
+  top: 45%;
+  left: 7%;
 `;
