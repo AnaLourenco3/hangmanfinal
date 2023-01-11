@@ -118,24 +118,25 @@ function GamePage() {
         </FormWrapper>
       </div>
       <Button onClick={() => navigate("/")}>NEW GAME</Button>
+
+      <WinLoose>
+        {isWinner && "Winner! - Refresh to try again"}
+        {isLoser && "Nice Try - Refresh to try again"}
+      </WinLoose>
       <div
-        style={
-          {
-            //   maxWidth: "900px",
-            //   display: "flex",
-            //   //   flexDirection: "column",
-            //   gap: "5rem",
-            //   margin: "0 auto",
-            //   alignItems: "center",
-            //   maxHeight: "400px",
-            //   paddingTop: "5rem",
-          }
-        }
+        style={{
+          position: "relative",
+          left: "5%",
+          maxWidth: "900px",
+          display: "flex",
+          flexDirection: "column",
+
+          margin: "0 auto",
+          alignItems: "center",
+          maxHeight: "600px",
+          paddingTop: "5rem",
+        }}
       >
-        <WinLoose>
-          {isWinner && "Winner! - Refresh to try again"}
-          {isLoser && "Nice Try - Refresh to try again"}
-        </WinLoose>
         <HangmanContainer>
           <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
         </HangmanContainer>
@@ -146,17 +147,16 @@ function GamePage() {
             wordToGuess={wordToGuess}
           />
         </HangmanWords>
-
-        <div>
-          <Keyboard
-            disabled={isWinner || isLoser}
-            activeLetters={guessedLetters.filter((letter) =>
-              wordToGuess.includes(letter)
-            )}
-            inactiveLetters={incorrectLetters}
-            addGuessedLetter={addGuessedLetter}
-          />
-        </div>
+      </div>
+      <div>
+        <Keyboard
+          disabled={isWinner || isLoser}
+          activeLetters={guessedLetters.filter((letter) =>
+            wordToGuess.includes(letter)
+          )}
+          inactiveLetters={incorrectLetters}
+          addGuessedLetter={addGuessedLetter}
+        />
       </div>
     </Background>
   );
@@ -174,19 +174,10 @@ const Background = styled.div`
 `;
 
 const HangmanContainer = styled.div`
-  position: absolute;
-
-  top: 10%;
-  left: 50%;
   transform: perspective(400px) translateZ(-200px);
 `;
 
 const HangmanWords = styled.p`
-  position: absolute;
-  top: 59%;
-  left: 40%;
-  max-width: 700px;
-  max-height: 400px;
   /* background-color: rgba(0, 0, 0, 0.5); */
   transform: perspective(400px) translateZ(-200px);
 `;
@@ -194,8 +185,8 @@ const HangmanWords = styled.p`
 const WinLoose = styled.div`
   position: absolute;
   max-width: 200px;
-  top: 30%;
-  right: 8%;
+  top: 40%;
+  right: 12%;
   font-size: 2rem;
   text-align: center;
 `;
