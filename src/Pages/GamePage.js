@@ -175,15 +175,20 @@ const Background = styled.div`
 
 const HangmanContainer = styled.div`
   position: absolute;
+
   top: 10%;
   left: 50%;
-  height: 200px;
+  transform: perspective(400px) translateZ(-200px);
 `;
 
-const HangmanWords = styled.div`
+const HangmanWords = styled.p`
   position: absolute;
   top: 59%;
-  left: 50%;
+  left: 40%;
+  max-width: 700px;
+  max-height: 400px;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  transform: perspective(400px) translateZ(-200px);
 `;
 
 const WinLoose = styled.div`
