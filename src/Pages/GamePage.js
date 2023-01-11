@@ -3,12 +3,12 @@ import { HangmanDrawing } from "../Components/HangmanDrawing";
 import { HangmanWord } from "../Components/HangmanWord";
 import { Keyboard } from "../Components/Keyboard";
 import words from "../Components/wordList";
-import winnerMe from '../Components/winnersMes.json'
-import loser from '../Components/loserArray.json'
+import winnerMe from "../Components/winnersMes.json";
+import loser from "../Components/loserArray.json";
 import styled from "styled-components";
 import BgImg from "../Assets/Chalkboard.png";
 import { useNavigate } from "react-router-dom";
-import '../Pages/containerman.css'
+import "../Pages/containerman.css";
 
 function getWord() {
   return words[Math.floor(Math.random() * words.length)];
@@ -32,18 +32,15 @@ function GamePage() {
 
   if (isLoser) {
     setTimeout(() => {
-      setShowMessage(false)
-
+      setShowMessage(false);
     }, 10000);
   }
   if (isWinner) {
     setTimeout(() => {
-      setShowMessage(false)
-console.log(isWinner, 'que pasa')
+      setShowMessage(false);
+      console.log(isWinner, "que pasa");
     }, 10000);
   }
-
-
 
   const addGuessedLetter = useCallback(
     (letter) => {
@@ -172,11 +169,20 @@ console.log(isWinner, 'que pasa')
             />
           </HangmanWords>
           <WinLoose className="game">
-            {isWinner && showMessage && <img alt="" src={winnerMe[Math.floor(Math.random() * winnerMe.length)]}></img>}
-            {isLoser && showMessage && <img alt="" src={loser[Math.floor(Math.random() * winnerMe.length)]}></img>}
+            {isWinner && showMessage && (
+              <img
+                alt=""
+                src={winnerMe[Math.floor(Math.random() * winnerMe.length)]}
+              ></img>
+            )}
+            {isLoser && showMessage && (
+              <img
+                alt=""
+                src={loser[Math.floor(Math.random() * winnerMe.length)]}
+              ></img>
+            )}
           </WinLoose>
         </HangmanContainer>
-
       </div>
       <div>
         <Keyboard
@@ -215,11 +221,11 @@ const HangmanWords = styled.p`
 const WinLoose = styled.div`
   position: absolute;
   max-width: 200px;
-  top: 45%;
-  right: 15%;
+  top: 40%;
+  right: 10%;
   font-size: 1.5rem;
   text-align: center;
- 
+  z-index: 6;
 `;
 
 const Title = styled.p`
