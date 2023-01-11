@@ -1,4 +1,5 @@
 import styles from "./Keyboard.module.css";
+import styled from "styled-components";
 
 const KEYS = [
   "a",
@@ -36,12 +37,12 @@ export function Keyboard({
   disabled = false,
 }) {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(75px, 1fr))",
-        gap: ".5rem",
-      }}
+    <Container
+    //   style={{
+    //     display: "grid",
+    //     gridTemplateColumns: "repeat(auto-fit, minmax(75px, 1fr))",
+    //     gap: ".5rem",
+    //   }}
     >
       {KEYS.map((key) => {
         const isActive = activeLetters.includes(key);
@@ -59,6 +60,16 @@ export function Keyboard({
           </button>
         );
       })}
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  position: absolute;
+  top: 80%;
+  left: 34%;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-gap: 20px;
+  max-height: 100vh;
+`;
