@@ -85,9 +85,9 @@ const SelectGenre = (props) => {
       </select>
 
       <button onClick={callMovieTitles}>GO!</button>
-      <p>
+      {/* <p>
         <strong>Movie:</strong> {titleToGuess.title}
-      </p>
+      </p> */}
     </div>
   );
 };
