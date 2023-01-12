@@ -8,7 +8,10 @@ import loser from "../Components/loserArray.json";
 import styled from "styled-components";
 import BgImg from "../Assets/Chalkboard.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import SelectGenre from "../Components/SelectGenre";
 import "../Pages/containerman.css";
+
 
 function getWord() {
   return words[Math.floor(Math.random() * words.length)];
@@ -16,19 +19,34 @@ function getWord() {
 
 function GamePage() {
   const navigate = useNavigate();
-  const [wordToGuess, setWordToGuess] = useState(getWord);
-  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [wordToGuess, setWordToGuess] = useState(getWord());
   const [genre, setGenre] = useState("");
+
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [titles, setTitles] = useState([]);
+  // console.log("titles", titles);
+  const titleToGuess =
+    titles && titles[Math.floor(Math.random() * titles.length)];
+  // console.log("title to guess?", titleToGuess.title);
+  // setWordToGuess(titleToGuess.title);
+  // useEffect(() => {
+  //   const titleToGuess =
+  //     titles && titles[Math.floor(Math.random() * titles.length)];
+  //   setWordToGuess(titleToGuess);
+  // }, []);
   const [showMessage, setShowMessage] = useState(true);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
 
+
+
   let isLoser = incorrectLetters.length >= 10;
   const isWinner = wordToGuess
     .split("")
     .every((letter) => guessedLetters.includes(letter));
+
 
   if (isLoser) {
     setTimeout(() => {
@@ -84,26 +102,46 @@ function GamePage() {
     };
   }, []);
 
-  const data = [
-    "Action",
-    "Adventure",
-    "Animation",
-    "Comedy",
-    "Crime",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "History",
-    "Horror",
-    "Music",
-    "Mystery",
-    "Romance",
-    "Science Fiction",
-    "TV Movie",
-    "Thriller",
-    "War",
-    "Western",
-  ];
+  const [data, setData] = useState(null);
+
+  const callGenre = async () => {
+    try {
+      const response = await axios.get(
+        "https://api.themoviedb.org/3/genre/movie/list?api_key=a0fdd7d682edade22bbce21b7ecf4554&language=en-US"
+      );
+      // console.log("API response", response.data);
+      setData(response.data.genres);
+    } catch (error) {
+      console.log("An error has occurred", error);
+    }
+  };
+  console.log("data?", data);
+
+  useEffect(() => {
+    // console.log("call genre?", data);
+    callGenre();
+  }, []);
+
+  // const data = [
+  //   "Action",
+  //   "Adventure",
+  //   "Animation",
+  //   "Comedy",
+  //   "Crime",
+  //   "Drama",
+  //   "Family",
+  //   "Fantasy",
+  //   "History",
+  //   "Horror",
+  //   "Music",
+  //   "Mystery",
+  //   "Romance",
+  //   "Science Fiction",
+  //   "TV Movie",
+  //   "Thriller",
+  //   "War",
+  //   "Western",
+  // ];
 
   function refreshPage() {
     window.location.reload(false);
@@ -111,8 +149,22 @@ function GamePage() {
 
   return (
     <Background>
+      {/* <div>
+        <select>
+          <option value="">----A Select a category----</option>
+          {data &&
+            data.map((g, index) => {
+              return (
+                <option key={g.id} value={g.name}>
+                  {g.name}
+                </option>
+              );
+            })}
+        </select>
+      </div> */}
       <Title>HANGMAN - MOVIE EDITION</Title>
       <div>
+        <SelectGenre setter={setTitles} getter={titles} />
         <FormWrapper>
           <Form action="#">
             <FormGroup>
@@ -122,17 +174,7 @@ function GamePage() {
                 onChange={(event) => setGenre(event.target.value)}
                 required
                 value={genre}
-              >
-                <option value="">----Select a category----</option>
-                {data &&
-                  data.map((g, index) => {
-                    return (
-                      <option key={index} value={g}>
-                        {g}
-                      </option>
-                    );
-                  })}
-              </InputSelect>
+              ></InputSelect>
             </FormGroup>
           </Form>
         </FormWrapper>
