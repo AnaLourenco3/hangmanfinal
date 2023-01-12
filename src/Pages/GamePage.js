@@ -9,16 +9,13 @@ import styled from "styled-components";
 import BgImg from "../Assets/Chalkboard.png";
 import axios from "axios";
 
-const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+const format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/;
 
 function GamePage() {
   const [wordToGuess, setWordToGuess] = useState("");
-  const [genre, setGenre] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [data, setData] = useState([]);
   const [titles, setTitles] = useState("");
-  const [genreID, setGenreId] = useState(0);
-  const [showMessage, setShowMessage] = useState(false);
 
   const callGenre = async () => {
     try {
@@ -65,7 +62,6 @@ function GamePage() {
     console.log(newTitle, "this is the new title");
     setWordToGuess(newTitle.toLowerCase());
     setGuessedLetters([]);
-    setShowMessage(false);
   };
 
   function getWord() {
