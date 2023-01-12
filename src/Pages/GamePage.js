@@ -3,15 +3,13 @@ import { HangmanDrawing } from "../Components/HangmanDrawing";
 import { HangmanWord } from "../Components/HangmanWord";
 import { Keyboard } from "../Components/Keyboard";
 import words from "../Components/wordList";
-import winnerMe from "../Components/winnersMes.json";
-import loser from "../Components/loserArray.json";
+import winnerMe from '../Components/winnersMes.json'
+import loser from '../Components/loserArray.json'
 import styled from "styled-components";
 import BgImg from "../Assets/Chalkboard.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import SelectGenre from "../Components/SelectGenre";
-import "../Pages/containerman.css";
-
+import '../Pages/containerman.css'
 
 function getWord() {
   return words[Math.floor(Math.random() * words.length)];
@@ -19,46 +17,34 @@ function getWord() {
 
 function GamePage() {
   const navigate = useNavigate();
-  const [wordToGuess, setWordToGuess] = useState(getWord());
-  const [genre, setGenre] = useState("");
-
+  const [wordToGuess, setWordToGuess] = useState(getWord);
   const [guessedLetters, setGuessedLetters] = useState([]);
-  const [titles, setTitles] = useState([]);
-  // console.log("titles", titles);
-  const titleToGuess =
-    titles && titles[Math.floor(Math.random() * titles.length)];
-  // console.log("title to guess?", titleToGuess.title);
-  // setWordToGuess(titleToGuess.title);
-  // useEffect(() => {
-  //   const titleToGuess =
-  //     titles && titles[Math.floor(Math.random() * titles.length)];
-  //   setWordToGuess(titleToGuess);
-  // }, []);
+  const [genre, setGenre] = useState("");
   const [showMessage, setShowMessage] = useState(true);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
   );
 
-
-
   let isLoser = incorrectLetters.length >= 10;
   const isWinner = wordToGuess
     .split("")
     .every((letter) => guessedLetters.includes(letter));
 
-
   if (isLoser) {
     setTimeout(() => {
-      setShowMessage(false);
+      setShowMessage(false)
+
     }, 10000);
   }
   if (isWinner) {
     setTimeout(() => {
-      setShowMessage(false);
-      console.log(isWinner, "que pasa");
+      setShowMessage(false)
+      console.log(isWinner, 'que pasa')
     }, 10000);
   }
+
+
 
   const addGuessedLetter = useCallback(
     (letter) => {
@@ -102,69 +88,35 @@ function GamePage() {
     };
   }, []);
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([])
 
   const callGenre = async () => {
     try {
       const response = await axios.get(
         "https://api.themoviedb.org/3/genre/movie/list?api_key=a0fdd7d682edade22bbce21b7ecf4554&language=en-US"
       );
-      // console.log("API response", response.data);
-      setData(response.data.genres);
+      setData(response.data.genres)
     } catch (error) {
       console.log("An error has occurred", error);
     }
   };
-  console.log("data?", data);
+  console.log(data, 'que pasa')
 
-  useEffect(() => {
-    // console.log("call genre?", data);
-    callGenre();
-  }, []);
-
-  // const data = [
-  //   "Action",
-  //   "Adventure",
-  //   "Animation",
-  //   "Comedy",
-  //   "Crime",
-  //   "Drama",
-  //   "Family",
-  //   "Fantasy",
-  //   "History",
-  //   "Horror",
-  //   "Music",
-  //   "Mystery",
-  //   "Romance",
-  //   "Science Fiction",
-  //   "TV Movie",
-  //   "Thriller",
-  //   "War",
-  //   "Western",
-  // ];
 
   function refreshPage() {
     window.location.reload(false);
+    callGenre();
+
   }
+
+  useEffect(() => {
+   callGenre();
+  }, []);
 
   return (
     <Background>
-      {/* <div>
-        <select>
-          <option value="">----A Select a category----</option>
-          {data &&
-            data.map((g, index) => {
-              return (
-                <option key={g.id} value={g.name}>
-                  {g.name}
-                </option>
-              );
-            })}
-        </select>
-      </div> */}
       <Title>HANGMAN - MOVIE EDITION</Title>
       <div>
-        <SelectGenre setter={setTitles} getter={titles} />
         <FormWrapper>
           <Form action="#">
             <FormGroup>
@@ -174,7 +126,17 @@ function GamePage() {
                 onChange={(event) => setGenre(event.target.value)}
                 required
                 value={genre}
-              ></InputSelect>
+              >
+                <option value="">----Select a category----</option>
+                {data &&
+                  data.map((g, index) => {
+                    return (
+                      <option key={index} value={g.id}>
+                        {g.name}
+                      </option>
+                    );
+                  })}
+              </InputSelect>
             </FormGroup>
           </Form>
         </FormWrapper>
@@ -211,20 +173,11 @@ function GamePage() {
             />
           </HangmanWords>
           <WinLoose className="game">
-            {isWinner && showMessage && (
-              <img
-                alt=""
-                src={winnerMe[Math.floor(Math.random() * winnerMe.length)]}
-              ></img>
-            )}
-            {isLoser && showMessage && (
-              <img
-                alt=""
-                src={loser[Math.floor(Math.random() * winnerMe.length)]}
-              ></img>
-            )}
+            {isWinner && showMessage && <img alt="" src={winnerMe[Math.floor(Math.random() * winnerMe.length)]}></img>}
+            {isLoser && showMessage && <img alt="" src={loser[Math.floor(Math.random() * winnerMe.length)]}></img>}
           </WinLoose>
         </HangmanContainer>
+
       </div>
       <div>
         <Keyboard
@@ -255,7 +208,7 @@ const HangmanContainer = styled.div`
   // transform: perspective(900px) translateZ(-100px);
 `;
 
-const HangmanWords = styled.p`
+const HangmanWords = styled.div`
   /* background-color: rgba(0, 0, 0, 0.5); */
   transform: perspective(600px) translateZ(-200px);
 `;
@@ -263,11 +216,11 @@ const HangmanWords = styled.p`
 const WinLoose = styled.div`
   position: absolute;
   max-width: 200px;
-  top: 40%;
-  right: 10%;
+  top: 45%;
+  right: 15%;
   font-size: 1.5rem;
   text-align: center;
-  z-index: 6;
+ 
 `;
 
 const Title = styled.p`
@@ -342,7 +295,6 @@ const InputSelect = styled.select`
 
 const Incorrect = styled.div`
   font-family: Chalk;
-
   font-size: 1.4rem;
   position: absolute;
   top: 45%;
