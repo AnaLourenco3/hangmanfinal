@@ -171,7 +171,6 @@ const BODY_PARTS = [
   LEFT_ARM,
   RIGHT_LEG,
   LEFT_LEG,
-
   RIGHT_SHOE,
   LEFT_SHOE,
   DUCK,

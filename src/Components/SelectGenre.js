@@ -5,13 +5,14 @@ import styled from "styled-components";
 const SelectGenre = (props) => {
   const [data, setData] = useState([]);
   const [genreID, setGenreId] = useState(0);
+  const [titles, setTitles] = useState([]);
 
   const callGenre = async () => {
     try {
       const response = await axios.get(
         "https://api.themoviedb.org/3/genre/movie/list?api_key=a0fdd7d682edade22bbce21b7ecf4554&language=en-US"
       );
-      // console.log("API response", response.data);
+      console.log("API response from compo", response.data);
       setData(response.data.genres);
     } catch (error) {
       console.log("An error has occurred", error);
@@ -98,29 +99,29 @@ const Genre = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const FormWrapper = styled.div`
-  position: absolute;
-  display: inline;
-  top: 30%;
-  left: 7%;
-`;
+// const FormWrapper = styled.div`
+//   position: absolute;
+//   display: inline;
+//   top: 30%;
+//   left: 7%;
+// `;
 
-const FormGroup = styled.div`
-  display: inline;
-`;
+// const FormGroup = styled.div`
+//   display: inline;
+// `;
 
-const Form = styled.form`
-  display: inline-block;
-  background-color: none;
-`;
+// const Form = styled.form`
+//   display: inline-block;
+//   background-color: none;
+// `;
 
-const InputSelect = styled.select`
-  background: none;
-  border-radius: 5px;
-  padding: 0.5rem;
-  font-family: Chalk;
-  font-size: 0.8rem;
-  color: rgba(250, 250, 250, 0.8);
-  border: 1px solid rgba(250, 250, 250, 0.8);
-`;
+// const InputSelect = styled.select`
+//   background: none;
+//   border-radius: 5px;
+//   padding: 0.5rem;
+//   font-family: Chalk;
+//   font-size: 0.8rem;
+//   color: rgba(250, 250, 250, 0.8);
+//   border: 1px solid rgba(250, 250, 250, 0.8);
+// `;
 export default SelectGenre;

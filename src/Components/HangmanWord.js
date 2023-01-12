@@ -1,10 +1,12 @@
 export function HangmanWord({ guessedLetters, wordToGuess, reveal = false }) {
+  console.log("wordToGuess from component", wordToGuess);
+
   return (
     <div
       style={{
         display: "flex",
         gap: ".25em",
-        fontSize: "3rem",
+        fontSize: "2rem",
 
         textTransform: "uppercase",
         fontFamily: "Chalk",
