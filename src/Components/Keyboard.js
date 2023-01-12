@@ -67,8 +67,8 @@ export function Keyboard({
 const Container = styled.div`
   position: absolute;
   top: 80%;
-  left: 34%;
+  left: 30%;
   display: grid;
   grid-template-columns: repeat(13, 1fr);
-  grid-gap: 20px;
+  grid-gap: 27px;
 `;
