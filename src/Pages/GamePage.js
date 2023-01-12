@@ -261,7 +261,6 @@ const InputSelect = styled.select`
 
 const Incorrect = styled.div`
   font-family: Chalk;
-
   font-size: 1.4rem;
   position: absolute;
   top: 35%;
