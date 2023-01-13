@@ -98,7 +98,7 @@ function GamePage() {
   if (isLoser) {
     setTimeout(() => {
       setShowMessage(true);
-    }, 4000);
+    }, 2000);
   }
   if (isWinner) {
     setTimeout(() => {
