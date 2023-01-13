@@ -61,22 +61,24 @@ function GamePage() {
     }
   };
 
-  // function getWord() {
-  //   return titles && titles[Math.floor(Math.random() * titles.length)]?.title;
-  // }
-
   const selectNewWord = () => {
-    const movie = titles && titles[Math.floor(Math.random() * titles.length)];
-    console.log("movie object", movie);
-    const { title, overview } = movie;
+    const movieObj =
+      titles && titles[Math.floor(Math.random() * titles.length)];
+    const newTitles = titles.filter((m) => m.id !== movieObj.id);
+    setTitles(newTitles);
+    console.log("movie object", movieObj);
+    const { title, overview } = movieObj;
     console.log("1 title?", title);
     console.log("hint", overview);
     // const newTitle = movie.title;
     // console.log(newTitle, "this is the new title");
-    setHint(overview);
+    const truncateOverview =
+      overview.length > 300 ? overview.slice(0, 300) + "..." : overview;
+    setHint(truncateOverview);
     setWordToGuess(title.toLowerCase());
     setGuessedLetters([]);
     setShowMessage(false);
+    setDisplay(false);
   };
 
   const incorrectLetters = guessedLetters.filter(
@@ -212,7 +214,7 @@ const HangmanWords = styled.div`
 
   flex-wrap: wrap;
   position: absolute;
-  bottom: 25%;
+  bottom: 23%;
   left: 43%;
 `;
 
@@ -283,15 +285,15 @@ const Hint = styled.button`
 `;
 
 const Plot = styled.p`
-position: abslute;
-top: 70%;
-left: 8.5%
-width: 100px;
-height: 50px;
-font-family: Chalk;
-color: rgba(250, 250, 250, 0.8);
-font-size: 0.6rem;
-letter-spacing: 2px
+  position: absolute;
+  top: 20%;
+  right: 4%;
+  width: 300px;
+  height: 50px;
+  font-family: Chalk;
+  color: rgba(250, 250, 250, 0.8);
+  font-size: 1rem;
+  letter-spacing: 2px;
 `;
 
 const Incorrect = styled.div`
