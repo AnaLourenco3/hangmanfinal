@@ -17,6 +17,8 @@ function GamePage() {
   const [data, setData] = useState([]);
   const [titles, setTitles] = useState("");
   const [showMessage, setShowMessage] = useState(false);
+  const [hint, setHint] = useState("");
+  const [display, setDisplay] = useState(false);
 
   const callGenre = async () => {
     try {
@@ -47,10 +49,11 @@ function GamePage() {
         const response = await axios.get(
           `https://api.themoviedb.org/3/discover/movie?api_key=a0fdd7d682edade22bbce21b7ecf4554&language=en-US&sort_by=popularity.desc,vote_average.desc&with_genres=${genreID}`
         );
-        console.log("titles", response.data);
+        // console.log("titles", response.data);
         const titles = response.data.results.filter(
           (movieData) => !containSpecialCharacters(movieData.title)
         );
+        // console.log("movie object?", titles);
         setTitles(titles);
       } catch (error) {
         console.log("An error has occurred", error);
@@ -58,17 +61,23 @@ function GamePage() {
     }
   };
 
+  // function getWord() {
+  //   return titles && titles[Math.floor(Math.random() * titles.length)]?.title;
+  // }
+
   const selectNewWord = () => {
-    const newTitle = getWord();
-    console.log(newTitle, "this is the new title");
-    setWordToGuess(newTitle.toLowerCase());
+    const movie = titles && titles[Math.floor(Math.random() * titles.length)];
+    console.log("movie object", movie);
+    const { title, overview } = movie;
+    console.log("1 title?", title);
+    console.log("hint", overview);
+    // const newTitle = movie.title;
+    // console.log(newTitle, "this is the new title");
+    setHint(overview);
+    setWordToGuess(title.toLowerCase());
     setGuessedLetters([]);
     setShowMessage(false);
   };
-
-  function getWord() {
-    return titles && titles[Math.floor(Math.random() * titles.length)]?.title;
-  }
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
@@ -82,7 +91,7 @@ function GamePage() {
       .split("")
       .every((letter) => guessedLetters.includes(letter));
 
-  console.log("wordToGuess", wordToGuess);
+  // console.log("wordToGuess", wordToGuess);
 
   if (isLoser) {
     setTimeout(() => {
@@ -127,7 +136,12 @@ function GamePage() {
       <Title>HANGMAN - MOVIE EDITION</Title>
 
       <NewGame onClick={() => selectNewWord()}>NEW GAME</NewGame>
-      {/* <Hint onClick={}>Hint</Hint> */}
+      {incorrectLetters.length > 8 ? (
+        <Hint onClick={(e) => setDisplay(!display)}>Hint</Hint>
+      ) : (
+        <></>
+      )}
+      {display === true ? <Plot>{hint}</Plot> : <></>}
       <Incorrect>
         Incorrect Letters:{" "}
         <p style={{ textAlign: "center" }}> {incorrectLetters.length} of 10</p>
@@ -254,19 +268,31 @@ const InputSelect = styled.select`
   border: 1px solid rgba(250, 250, 250, 0.8);
 `;
 
-// const Hint = styled.button`
-//   position: absolute;
-//   top: 60%;
-//   left: 8%;
-//   width: 200px;
-//   height: 50px;
-//   background: none;
-//   border-radius: 50px;
-//   font-family: Chalk;
-//   color: rgba(250, 250, 250, 0.8);
-//   font-size: 1rem;
-//   letter-spacing: 5px;
-// `;
+const Hint = styled.button`
+  position: absolute;
+  top: 65%;
+  left: 8.5%;
+  width: 200px;
+  height: 50px;
+  background: none;
+  border-radius: 50px;
+  font-family: Chalk;
+  color: rgba(250, 250, 250, 0.8);
+  font-size: 1rem;
+  letter-spacing: 5px;
+`;
+
+const Plot = styled.p`
+position: abslute;
+top: 70%;
+left: 8.5%
+width: 100px;
+height: 50px;
+font-family: Chalk;
+color: rgba(250, 250, 250, 0.8);
+font-size: 0.6rem;
+letter-spacing: 2px
+`;
 
 const Incorrect = styled.div`
   font-family: Chalk;

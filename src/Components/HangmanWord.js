@@ -1,5 +1,5 @@
 export function HangmanWord({ guessedLetters, wordToGuess, reveal = false }) {
-  console.log("wordToGuess from component", wordToGuess);
+  // console.log("wordToGuess from component", wordToGuess);
 
   return (
     <div
