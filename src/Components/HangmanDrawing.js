@@ -2,7 +2,6 @@ import Swen from "../Assets/Swen.png";
 import Karla from "../Assets/Karla.png";
 import Maria from "../Assets/Maria.png";
 import Duck from "../Assets/duck.png";
-import Sunglasses from "../Assets/sunglasses.png";
 import Shoe from "../Assets/shoe.png";
 import Blood from "../Assets/blood.png";
 
