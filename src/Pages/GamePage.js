@@ -16,6 +16,7 @@ function GamePage() {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [data, setData] = useState([]);
   const [titles, setTitles] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
 
   const callGenre = async () => {
     try {
@@ -31,7 +32,7 @@ function GamePage() {
     callGenre();
   }, []);
 
-  const containSpecialCharacter = (title) => {
+  const containSpecialCharacters = (title) => {
     if (format.test(title)) {
       return true;
     } else {
@@ -48,7 +49,7 @@ function GamePage() {
         );
         console.log("titles", response.data);
         const titles = response.data.results.filter(
-          (movieData) => !containSpecialCharacter(movieData.title)
+          (movieData) => !containSpecialCharacters(movieData.title)
         );
         setTitles(titles);
       } catch (error) {
@@ -62,6 +63,7 @@ function GamePage() {
     console.log(newTitle, "this is the new title");
     setWordToGuess(newTitle.toLowerCase());
     setGuessedLetters([]);
+    setShowMessage(false);
   };
 
   function getWord() {
@@ -81,7 +83,18 @@ function GamePage() {
       .every((letter) => guessedLetters.includes(letter));
 
   console.log("wordToGuess", wordToGuess);
-  console.log("guessedLetters", guessedLetters);
+
+  if (isLoser) {
+    setTimeout(() => {
+      setShowMessage(true);
+    }, 4000);
+  }
+  if (isWinner) {
+    setTimeout(() => {
+      setShowMessage(true);
+      console.log(isWinner, "que pasa");
+    }, 1000);
+  }
 
   const addGuessedLetter = useCallback(
     (letter) => {
@@ -124,13 +137,13 @@ function GamePage() {
           <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
         </HangmanContainer>
         <WinLoose>
-          {isWinner && (
+          {isWinner && showMessage && (
             <img
               alt=""
               src={winnerMe[Math.floor(Math.random() * winnerMe.length)]}
             ></img>
           )}
-          {isLoser && (
+          {isLoser && showMessage && (
             <img
               alt=""
               src={loser[Math.floor(Math.random() * winnerMe.length)]}

@@ -2,8 +2,8 @@ import Swen from "../Assets/Swen.png";
 import Karla from "../Assets/Karla.png";
 import Maria from "../Assets/Maria.png";
 import Duck from "../Assets/duck.png";
-import Sunglasses from "../Assets/sunglasses.png";
 import Shoe from "../Assets/shoe.png";
+import Blood from "../Assets/blood.png";
 
 const img = [Karla, Maria, Swen];
 function imgRandom(imgArr) {
@@ -148,17 +148,17 @@ const LEFT_SHOE = (
   />
 );
 
-const SUN = (
+const BLOOD = (
   <img
-    src={Sunglasses}
+    src={Blood}
     alt="Logo"
     style={{
-      width: "150px",
-      height: "150px",
+      width: "1200px",
+      height: "900px",
 
       position: "absolute",
-      top: "25px",
-      right: "-70px",
+      top: "-50%",
+      right: "-190%",
       zIndex: 3,
     }}
   />
@@ -174,7 +174,7 @@ const BODY_PARTS = [
   RIGHT_SHOE,
   LEFT_SHOE,
   DUCK,
-  SUN,
+  BLOOD,
 ];
 
 export function HangmanDrawing({ numberOfGuesses }) {
